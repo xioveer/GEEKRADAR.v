@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light only" />
+  <title>GeekRadar</title>
+  <meta name="description" content="Encuentra arcades, comida, manga y tiendas geek reales cerca de tu ubicación." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=block" />
+</head>
+<body>
+  <div id="map" class="map" role="application" aria-label="Mapa"></div>
+
+  <!-- Barra superior flotante: búsqueda + categorías -->
+  <header class="topbar">
+    <div class="searchbox">
+      <span class="brand" aria-hidden="true">
+        <span class="material-symbols-outlined">radar</span>
+      </span>
+      <input id="searchInput" type="search" placeholder="Filtrar resultados en GeekRadar" autocomplete="off" aria-label="Filtrar resultados por nombre" />
+      <button id="clearSearchBtn" class="icon-btn" type="button" aria-label="Borrar filtro" hidden>
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <!-- Marcador temporal de despliegue (reemplaza al botón de perfil) -->
+      <span id="versionBadge" class="version-badge">VERSIÓN 1</span>
+    </div>
+    <nav id="categoryChips" class="chips" aria-label="Categorías"></nav>
+  </header>
+
+  <!-- Panel de resultados (bottom sheet en móvil, panel lateral en escritorio) -->
+  <section id="sheet" class="sheet" aria-label="Resultados">
+    <button id="sheetHandle" class="sheet__handle" type="button" aria-label="Expandir o contraer resultados">
+      <span></span>
+    </button>
+    <div class="sheet__header">
+      <div>
+        <h1 id="sheetTitle" class="sheet__title">Explora a tu alrededor</h1>
+        <p id="sheetSubtitle" class="sheet__subtitle">Elige una categoría para escanear la zona.</p>
+      </div>
+    </div>
+    <div id="statusBox" class="status" hidden></div>
+    <ul id="results" class="results" aria-live="polite"></ul>
+    <p class="sheet__attribution">Datos de lugares © colaboradores de OpenStreetMap</p>
+  </section>
+
+  <!-- Controles del mapa -->
+  <div class="map-controls">
+    <button id="locateBtn" class="fab" type="button" aria-label="Centrar en mi ubicación">
+      <span class="material-symbols-outlined">my_location</span>
+    </button>
+  </div>
+
+  <!-- Solicitud de ubicación -->
+  <div id="gpsGate" class="gate" hidden>
+    <div class="gate__card" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+      <div class="gate__icon"><span class="material-symbols-outlined">location_on</span></div>
+      <h2 id="gateTitle">Activa tu ubicación</h2>
+      <p id="gateText">GeekRadar usa el GPS de tu dispositivo para encontrar lugares reales cerca de ti.</p>
+      <button id="gateBtn" class="btn btn--primary" type="button">Usar mi ubicación</button>
+      <button id="gateSkipBtn" class="btn btn--text gate__skip" type="button">Explorar Barranquilla mientras tanto</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
